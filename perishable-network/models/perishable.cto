@@ -1,0 +1,83 @@
+namespace org.incas.bp.v2
+
+/**
+ * The status of a resource
+ */
+enum ResourceStatus {
+  o NORMAL
+  o DELETED
+}
+
+/**
+ * An abstract transaction that is related to a Resource
+ */
+/*abstract transaction ResourceTransaction {
+    --> Resource resource
+}*/
+
+
+/**
+ * A notification that a resource has been uploaded by the uploader 
+ */
+/*transaction ResourceUploaded extends ResourceTransaction {
+}*/
+
+/**
+ * A resource being tracked as an asset on the ledger
+ */
+asset Resource identified by resourceId {
+  o String resourceId
+  o ResourceStatus status
+  o String userId
+  o DateTime date
+}
+
+
+/**
+ * An participant type in this business network
+ */
+participant User identified by userId {
+  o String userId
+  o String[] resources
+  o Double accountBalance
+}
+
+/**
+ * An uploader is a type of participant in the network
+ */
+/*participant Uploader extends Business {
+}*/
+
+/**
+ * An user is a type of participant in the network
+ */
+/*participant User extends Business {
+}*/
+
+/**
+ * An issuer is a type of participant in the network
+ */
+/*participant Issuer extends Business {
+}*/
+/**
+ * JUST FOR INITIALIZING A DEMO
+ */
+transaction SetupDemo {
+}
+
+/**
+ * For user to recharge token through RMB
+ */
+transaction Recharge {
+  --> User businessUser
+  o Double value
+}
+
+/**
+ * For user to consume
+ */
+ transaction Consume {
+   --> User businessUser
+   --> Resource resource
+   o Double value
+ }
